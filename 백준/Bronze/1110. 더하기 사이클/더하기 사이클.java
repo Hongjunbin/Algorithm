@@ -2,8 +2,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static final String STRING_ZERO = "0";
-
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -12,25 +10,14 @@ public class Main {
         int inputCopy = input;
         int cycle = 0;
 
-        while(true) {
+        do {
             cycle++;
-            String textNumber = "";
-            if(inputCopy < 10) {
-                textNumber = STRING_ZERO + inputCopy;
-            } else {
-                textNumber = String.valueOf(inputCopy);
-            }
-            int a = Integer.parseInt(String.valueOf(textNumber.charAt(0)));
-            int b = Integer.parseInt(String.valueOf(textNumber.charAt(1)));
-            int result = a + b;
-            if(result >= 10) {
-                result = result % 10;
-            }
-            inputCopy = Integer.parseInt(String.valueOf(b) + result);
-            if(input == inputCopy) {
-                break;
-            }
-        }
+            int a = inputCopy / 10;   // 첫 번째 자리
+            int b = inputCopy % 10;   // 두 번째 자리
+            int sum = (a + b) % 10;   // 두 자리 합의 마지막 자리
+            inputCopy = b * 10 + sum; // 새로운 숫자 생성
+        } while (input != inputCopy);
+
         System.out.println(cycle);
     }
 }
